@@ -1,0 +1,20 @@
+sudo: required
+dist: trusty
+language: ruby
+bundler_args: "--without production"
+services:
+- postgresql
+- redis
+addons:
+  postgresql: '9.5'
+before_script:
+- cp config/database.travis.yml config/database.yml
+script:
+- RAILS_ENV=test rake db:setup spec
+notifications:
+  email: false
+  slack:
+    on_success: change
+    on_failure: change
+    rooms:
+      secure: KV5P2HBDcASy1K1L2PYwtgp5+jInvEygZE54vp3zzmihgiAQ0hCDOJRk6CDppc0I5XDqkNiWhvvixQoG1xn6Gv6HzfIoG3fyzHPFMwoRZKKH4sHTqaXMJ1AjhDYFO85a7JXgKqw/RB9Ax99YmZbMrpIhDz+kM7TcVqX902sd9ALSgUFElBUe4kws6wZjja3y6sbC9qK1rF2XBTEmtqBH+B1zyDm+wCcMfxBj2fDnjK+GAembhTwxNemXyd66Gnuuv0/BI0R1wWeTOQAGoH7SWIb1rGzum8oroGzoctK9JdyK5SOPZn9Q7pLuK+u8qP5WTYP4D8qy6BVHrLsNH7kLy6Ph9cZ/HfT7LOlZFWph6Dalo6r3MG/Zy4zmXsJTvy24TekUa9r5uu8CP5TvRTXaUv1sz/la9AIyPGD0h+entafqzA5qZt8bPS3lnLhtkFYp2zbZ78V4fEOgRs/NbsXNrvL6UYcWRU+H3J1fltFK6PNCiWwg82Z4nvnFVhr8Ui6cykziWw+x6/gZay0lgbw1VvzE1Z7WJTOjtQaaH/pexhJDGyFxmQyAHixACMc347o39d8I0p4PhW4KJAcymtIXGHRv9qGbryqzXOIzInsqY8o1aEF+c+v+SkhI763ZQDvuDOEtCtFdxRmwzinbpFpByf2dN4VPrgGb/EFjpbt3c40=

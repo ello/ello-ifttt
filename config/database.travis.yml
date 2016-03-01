@@ -1,0 +1,4 @@
+test:
+  adapter: postgresql
+  database: ello-ifttt_test
+  username: postgres
