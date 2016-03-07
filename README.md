@@ -1,24 +1,12 @@
-## README
+## Ello IFTTT Integration
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This app manages all of the ins and outs of Ello's integration with
+[IFTTT](https://ifttt.com/). It uses a combination of JWT OAuth tokens, Ello API
+calls, and a Kinesis stream consumer to both send triggers and service actions.
 
-Things you may want to cover:
+It's a fairly vanilla Rails 5 application backed by a Postgres database.
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## Setup 
+## Running tests 
+## Contributing
+## Deployment
