@@ -11,9 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 20160309163655) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "events", force: :cascade do |t|
+    t.string   "owner_id"
+    t.string   "action_taken_by_id"
+    t.string   "kind"
+    t.datetime "created_at"
+    t.json     "payload"
+  end
+
+  add_index "events", ["action_taken_by_id"], name: "index_events_on_action_taken_by_id", using: :btree
+  add_index "events", ["created_at"], name: "index_events_on_created_at", using: :btree
+  add_index "events", ["kind"], name: "index_events_on_kind", using: :btree
+  add_index "events", ["owner_id"], name: "index_events_on_owner_id", using: :btree
 
 end
