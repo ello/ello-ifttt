@@ -6,6 +6,9 @@ gem 'puma'
 
 gem 'jwt'
 
+gem 'kinesis-stream-reader', github: 'ello/kinesis-stream-reader', require: 'stream_reader'
+gem 'interactor-rails', '~> 2.0'
+
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 # gem 'jbuilder', '~> 2.0'
 
