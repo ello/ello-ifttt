@@ -30,7 +30,7 @@ describe CreateEventFromStream do
     let(:kind) { 'post_was_loved' }
 
     it 'should create an event' do
-      described_class.call(kind: kind, record: record)
+      described_class.perform(kind: kind, record: record)
       event = Event.last
       expect(event).to be_present
       expect(event.kind).to eq kind
@@ -62,7 +62,7 @@ describe CreateEventFromStream do
     let(:kind) { 'post_was_created' }
 
     it 'should create an event' do
-      described_class.call(kind: kind, record: record)
+      described_class.perform(kind: kind, record: record)
       event = Event.last
       expect(event).to be_present
       expect(event.kind).to eq kind
@@ -77,7 +77,7 @@ describe CreateEventFromStream do
     let(:kind) { 'unknown_kind' }
 
     it 'should not do anything' do
-      described_class.call(kind: kind, record: record)
+      described_class.perform(kind: kind, record: record)
 
       expect(Event.count).to eq 0
     end

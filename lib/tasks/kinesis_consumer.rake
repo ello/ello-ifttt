@@ -1,5 +1,5 @@
 namespace :kinesis do
-  desc 'Parses and saves events from kineisis queue'
+  desc 'Parses and saves events from kinesis queue'
   task consumer: :environment do
 
     stream = StreamReader.new(
@@ -8,7 +8,7 @@ namespace :kinesis do
     )
 
     stream.run! do |record, kind|
-      CreateEventFromStream.call(record: record, kind: kind.underscore)
+      CreateEventFromStream.perform_async(record: record, kind: kind.underscore)
     end
   end
 end

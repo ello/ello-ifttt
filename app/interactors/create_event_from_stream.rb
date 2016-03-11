@@ -1,7 +1,8 @@
-class CreateEventFromStream
-  include Interactor
+require_relative '../../lib/sidekiq/interactor'
 
-  def call
+class CreateEventFromStream < Sidekiq::Interactor
+
+  def call(_c)
     if respond_to?(context.kind)
       send context.kind
     end
