@@ -2,32 +2,28 @@ class CreateEventFromStream
   include Interactor
 
   def call
+    if respond_to?(context.kind)
+      send context.kind
+    end
+  end
+
+  def post_was_created
     Event.create!(
       kind: context.kind,
       owner_id: context.record['author']['id'],
-      action_taken_by_id: action_taken_by_id,
+      action_taken_by_id: context.record['author']['id'],
       payload: context.record,
-      created_at: Time.at(created_at)
+      created_at: Time.at(context.record['post']['created_at'])
     )
   end
 
-  private
-
-  def action_taken_by_id
-    case context.kind
-    when 'post_was_created'
-      context.record['author']['id']
-    when 'post_was_loved'
-      context.record['lover']['id']
-    end
-  end
-
-  def created_at
-    case context.kind
-    when 'post_was_created'
-      context.record['post']['created_at']
-    when 'post_was_loved'
-      context.record['loved_at']
-    end
+  def post_was_loved
+    Event.create!(
+      kind: context.kind,
+      owner_id: context.record['author']['id'],
+      action_taken_by_id: context.record['lover']['id'],
+      payload: context.record,
+      created_at: Time.at(context.record['loved_at'])
+    )
   end
 end

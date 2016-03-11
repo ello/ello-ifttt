@@ -71,4 +71,15 @@ describe CreateEventFromStream do
       expect(event.action_taken_by_id).to eq '42'
     end
   end
+
+  context 'unknown event' do
+    let(:record) { {} }
+    let(:kind) { 'unknown_kind' }
+
+    it 'should not do anything' do
+      described_class.call(kind: kind, record: record)
+
+      expect(Event.count).to eq 0
+    end
+  end
 end
