@@ -77,9 +77,6 @@ module Sidekiq
 
     def serialize
       params.each do |key, value|
-        if value.is_a?(BaseDecorator) && value.model.try(:is_a?, ActiveRecord::Base)
-          raise ArgumentError.new('Cannot serialize BaseDecorators that wrap ActiveRecord objects, use .model instead')
-        end
         if serialize?(value)
           params[key] = serialize_value(value)
         end
