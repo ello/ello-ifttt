@@ -32,7 +32,7 @@ class Ifttt::V1::TestController < ApplicationController
       iss: 'Ello, PBC',
       iat: Time.now.to_i,
       jti: SecureRandom.hex,
-      exp: 2.hours.from_now,
+      exp: 2.hours.from_now.to_i,
       data: {
         analytics_id: 'abc123',
         user_id: 'test-user-1',
