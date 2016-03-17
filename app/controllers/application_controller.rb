@@ -29,4 +29,8 @@ class ApplicationController < ActionController::API
   def valid_channel_key?
     request.headers['IFTTT-Channel-Key'] == Rails.application.secrets.ifttt_channel_key
   end
+
+  def validate_channel_key
+    render_unauthorized unless valid_channel_key?
+  end
 end
