@@ -49,25 +49,25 @@ class Ifttt::V1::TestController < ApplicationController
         owner_id: 'test-user-1',
         action_taken_by_id: 'test-user-1',
         kind: 'post_was_created',
-        created_at: Time.new(2016, 01, i+1)
+        created_at: Time.new(2016, 01, i + 1)
       ).first_or_create(
         payload: {
           post: {
-            id: "test-post-#{i+1}",
-            url: "https://ello.co/test-user-1/posts/test-post-#{i+1}"
+            id: "test-post-#{i + 1}",
+            url: "https://ello.co/test-user-1/posts/test-post-#{i + 1}"
           }
         }
       )
 
       # 3 Loves by test user
       Event.where(
-        owner_id: "test-user-#{i+10}",
+        owner_id: "test-user-#{i + 10}",
         action_taken_by_id: 'test-user-1',
         kind: 'post_was_loved',
-        created_at: Time.new(2016, 01, i+1)
+        created_at: Time.new(2016, 01, i + 1)
       ).first_or_create!(
         payload: {
-          loved_at: Time.new(2016, 01, i+1),
+          loved_at: Time.new(2016, 01, i + 1),
           post: {
             id: "test-post-#{i}",
             url: "https://ello.co/test-user-1/posts/test-post-#{i}"

@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::API
 
-  rescue_from JWT::ExpiredSignature, with: :render_unauthorized
   rescue_from JWT::DecodeError, with: :render_invalid_token
+  rescue_from JWT::ExpiredSignature, with: :render_unauthorized
 
   private
 
@@ -28,7 +28,7 @@ class ApplicationController < ActionController::API
   end
 
   def render_invalid_token
-    render json: { errors: [{ message: "Invalid or malformed JWT token" }] }, status: :unauthorized
+    render json: { errors: [{ message: 'Invalid or malformed JWT token' }] }, status: :unauthorized
   end
 
   def valid_channel_key?
