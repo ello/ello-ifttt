@@ -10,6 +10,7 @@ gem 'kinesis-stream-reader', github: 'ello/kinesis-stream-reader', require: 'str
 gem 'interactor-rails', '~> 2.0'
 
 gem 'sidekiq'
+gem 'sinatra', :require => nil, github: 'sinatra/sinatra'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 # gem 'jbuilder', '~> 2.0'
