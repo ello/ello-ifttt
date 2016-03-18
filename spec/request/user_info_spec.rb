@@ -40,6 +40,10 @@ RSpec.describe 'Fetching user info', type: :request do
         }
       )
     end
+
+    it 'creates a user' do
+      expect(RegisteredUser.last.user_id).to eq('test-user-1')
+    end
   end
 
   describe 'with an expired JWT token' do
