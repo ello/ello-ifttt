@@ -18,7 +18,7 @@ RSpec.describe 'Fetching new post triggers', type: :request do
       data: {
         analytics_id: 'abc123',
         username: 'archer',
-        user_id: 1,
+        id: 1
       }
     }
   end
@@ -74,11 +74,11 @@ RSpec.describe 'Fetching new post triggers', type: :request do
       expect(response.status).to eq(200)
       expect(response_json['data'].size).to eq 2
       expect(response_json['data'].first).to eq(
-        'post_url' => 'https://ello.co/archer/posts/1',
-        'created_at' => pc1.created_at.as_json,
+        'post_url' => 'https://ello.co/archer/posts/2',
+        'created_at' => pc2.created_at.as_json,
         'meta' => {
-          'id' => pc1.id,
-          'timestamp' => pc1.created_at.to_i
+          'id' => pc2.id,
+          'timestamp' => pc2.created_at.to_i
         }
       )
     end

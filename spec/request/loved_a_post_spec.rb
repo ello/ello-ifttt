@@ -18,7 +18,7 @@ RSpec.describe 'Fetching loved post triggers', type: :request do
       data: {
         analytics_id: 'abc123',
         username: 'archer',
-        user_id: 1
+        id: 1
       }
     }
   end
@@ -46,7 +46,10 @@ RSpec.describe 'Fetching loved post triggers', type: :request do
       Event.create!(
         owner_id: '3',
         payload: {
-          post: { id: 2, },
+          post: {
+            id: 2,
+            url: 'https://ello.co/lana/posts/2'
+          },
           loved_at: 1.hour.ago
         },
         created_at: 1.hour.ago,
@@ -83,11 +86,11 @@ RSpec.describe 'Fetching loved post triggers', type: :request do
       expect(response.status).to eq(200)
       expect(response_json['data'].size).to eq 2
       expect(response_json['data'].first).to eq(
-        'post_url' => 'https://ello.co/lana/posts/1',
-        'loved_at' => pl1.payload['loved_at'].as_json,
+        'post_url' => 'https://ello.co/lana/posts/2',
+        'loved_at' => pl2.payload['loved_at'].as_json,
         'meta' => {
-          'id' => pl1.id,
-          'timestamp' => pl1.created_at.to_i
+          'id' => pl2.id,
+          'timestamp' => pl2.created_at.to_i
         }
       )
     end

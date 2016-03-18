@@ -3,7 +3,7 @@ class Ifttt::V1::UsersController < ApplicationController
     render json: {
       data: {
         name: jwt_payload['data']['username'],
-        id: jwt_payload['data']['username'],
+        id: jwt_payload['data']['id'],
         url: "https://ello.co/#{jwt_payload['data']['username']}"
       }
     }.to_json

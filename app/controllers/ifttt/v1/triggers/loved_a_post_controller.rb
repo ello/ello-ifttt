@@ -8,8 +8,8 @@ class Ifttt::V1::Triggers::LovedAPostController < ApplicationController
   def events
     Event.where(
       kind: 'post_was_loved',
-      action_taken_by_id: jwt_payload['data']['user_id'].to_s,
-    ).order(:created_at).limit(limit)
+      action_taken_by_id: user_id,
+    ).order('created_at DESC').limit(limit)
   end
 
   def to_json(event)

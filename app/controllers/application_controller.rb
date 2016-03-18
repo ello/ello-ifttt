@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::API
 
+  rescue_from JWT::DecodeError, with: :render_invalid_token
   rescue_from JWT::ExpiredSignature, with: :render_unauthorized
 
   private
@@ -26,7 +27,19 @@ class ApplicationController < ActionController::API
     head :unauthorized
   end
 
+  def render_invalid_token
+    render json: { errors: [{ message: 'Invalid or malformed JWT token' }] }, status: :unauthorized
+  end
+
   def valid_channel_key?
     request.headers['IFTTT-Channel-Key'] == Rails.application.secrets.ifttt_channel_key
+  end
+
+  def validate_channel_key
+    render_unauthorized unless valid_channel_key?
+  end
+
+  def user_id
+    jwt_payload['data']['id'].to_s
   end
 end
