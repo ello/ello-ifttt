@@ -18,7 +18,7 @@ RSpec.describe 'Fetching new post triggers', type: :request do
       data: {
         analytics_id: 'abc123',
         username: 'archer',
-        user_id: 1,
+        id: 1
       }
     }
   end

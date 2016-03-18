@@ -38,4 +38,8 @@ class ApplicationController < ActionController::API
   def validate_channel_key
     render_unauthorized unless valid_channel_key?
   end
+
+  def user_id
+    jwt_payload['data']['id'].to_s
+  end
 end

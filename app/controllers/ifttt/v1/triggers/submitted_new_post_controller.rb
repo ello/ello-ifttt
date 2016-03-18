@@ -8,7 +8,7 @@ class Ifttt::V1::Triggers::SubmittedNewPostController < ApplicationController
   def events
     Event.where(
       kind:  'post_was_created',
-      owner_id: jwt_payload['data']['user_id'].to_s,
+      owner_id: user_id,
     ).order('created_at DESC').limit(limit)
   end
 

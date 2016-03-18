@@ -17,7 +17,8 @@ RSpec.describe 'Fetching user info', type: :request do
       exp: exp.to_i,
       data: {
         analytics_id: 'abc123',
-        username: 'archer'
+        username: 'archer',
+        id: 'test-user-1'
       }
     }
   end
@@ -34,7 +35,7 @@ RSpec.describe 'Fetching user info', type: :request do
       expect(response_json).to eq(
         'data' => {
           'name' => 'archer',
-          'id' => 'archer',
+          'id' => 'test-user-1',
           'url' => 'https://ello.co/archer'
         }
       )
