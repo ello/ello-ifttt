@@ -4,7 +4,8 @@ class CreateEventFromStream < Sidekiq::Interactor
 
   def call(_c)
     if respond_to?(context.kind)
-      send context.kind
+      event = send context.kind
+      PushEventToIftttRealtime.perform_async(event: event)
     end
   end
 
