@@ -87,7 +87,7 @@ RSpec.describe 'Fetching loved post triggers', type: :request do
       expect(response_json['data'].size).to eq 2
       expect(response_json['data'].first).to eq(
         'post_url' => 'https://ello.co/lana/posts/2',
-        'loved_at' => pl2.payload['loved_at'].as_json,
+        'loved_at' => pl2.payload['loved_at'].to_time.iso8601,
         'meta' => {
           'id' => pl2.id,
           'timestamp' => pl2.created_at.to_i

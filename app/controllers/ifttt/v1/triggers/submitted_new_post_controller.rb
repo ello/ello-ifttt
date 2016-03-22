@@ -15,7 +15,7 @@ class Ifttt::V1::Triggers::SubmittedNewPostController < ApplicationController
   def to_json(event)
     {
       post_url: event.payload['post']['url'],
-      created_at: event.created_at,
+      created_at: event.created_at.to_time.iso8601,
       meta: {
         id: event.id,
         timestamp: event.created_at.to_i
