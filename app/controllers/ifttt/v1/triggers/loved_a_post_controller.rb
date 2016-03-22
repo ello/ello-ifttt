@@ -15,7 +15,7 @@ class Ifttt::V1::Triggers::LovedAPostController < ApplicationController
   def to_json(event)
     {
       post_url: event.payload['post']['url'],
-      loved_at: event.payload['loved_at'].to_time.iso8601,
+      loved_at: event.created_at.to_time.iso8601,
       meta: {
         id: event.id,
         timestamp: event.created_at.to_i
