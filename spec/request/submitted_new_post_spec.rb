@@ -75,7 +75,7 @@ RSpec.describe 'Fetching new post triggers', type: :request do
       expect(response_json['data'].size).to eq 2
       expect(response_json['data'].first).to eq(
         'post_url' => 'https://ello.co/archer/posts/2',
-        'created_at' => pc2.created_at.as_json,
+        'created_at' => pc2.created_at.to_time.iso8601,
         'meta' => {
           'id' => pc2.id,
           'timestamp' => pc2.created_at.to_i
