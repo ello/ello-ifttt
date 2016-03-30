@@ -42,4 +42,12 @@ class ApplicationController < ActionController::API
   def user_id
     jwt_payload['data']['id'].to_s
   end
+
+  def current_registered_user
+    @current_registered_user ||= RegisteredUser.find_by(user_id: user_id)
+  end
+
+  def require_registered_user
+    render_unauthorized unless current_registered_user
+  end
 end
