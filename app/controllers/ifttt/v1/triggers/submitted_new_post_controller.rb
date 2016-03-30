@@ -1,4 +1,6 @@
 class Ifttt::V1::Triggers::SubmittedNewPostController < ApplicationController
+  before_action :require_registered_user
+
   def index
     render json: { data: events.map { |e| to_json(e) } }
   end
@@ -6,7 +8,7 @@ class Ifttt::V1::Triggers::SubmittedNewPostController < ApplicationController
   private
 
   def events
-    Event.where(
+    Event.where('created_at >= ?', current_registered_user.created_at).where(
       kind:  'post_was_created',
       owner_id: user_id,
     ).order('created_at DESC').limit(limit)
