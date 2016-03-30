@@ -5,21 +5,13 @@ class PushEventToIftttRealtime < Sidekiq::Interactor
   HOST = URI('https://realtime.ifttt.com')
 
   def call(_c)
-    if user_is_registered?
-      send_to_ifttt
-    end
+    send_to_ifttt
   end
 
   private
 
   def event
     context[:event]
-  end
-
-  def user_is_registered?
-    RegisteredUser.
-      where(user_id: [event.owner_id, event.action_taken_by_id]).
-      exists?
   end
 
   def send_to_ifttt
