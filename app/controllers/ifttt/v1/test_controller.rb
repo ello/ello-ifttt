@@ -2,6 +2,7 @@ class Ifttt::V1::TestController < ApplicationController
   before_action :validate_channel_key
 
   def setup
+    create_test_user!
     create_events_as_needed!
     render json: {
       data: {
@@ -39,6 +40,13 @@ class Ifttt::V1::TestController < ApplicationController
         username: 'testuser'
       }
     }
+  end
+
+  def create_test_user!
+    RegisteredUser.where(
+      user_id: 'test-user-1',
+      created_at: Time.new(2015, 1, 1) # Before posts created
+    ).first_or_create
   end
 
   def create_events_as_needed!
