@@ -14,8 +14,17 @@ RSpec.describe 'test/setup', type: :request do
     expect(response_json['data']['accessToken']).to be_present
   end
 
+  it 'should create a user' do
+    expect(RegisteredUser.count).to eq(1)
+    expect(RegisteredUser.first.user_id).to eq('test-user-1')
+    expect(RegisteredUser.first.created_at.year).to eq(2015)
+  end
+
   it 'should create 6 events' do
     expect(Event.count).to eq(6)
+    expect(Event.pluck(:created_at).map(&:year).uniq).to eq([2016])
+    expect(Event.pluck(:owner_id)).to include('test-user-1')
+    expect(Event.pluck(:action_taken_by_id)).to include('test-user-1')
   end
 
 end
