@@ -3,7 +3,7 @@ require_relative '../../lib/sidekiq/interactor'
 class CreateEventFromStream < Sidekiq::Interactor
 
   def call(_c)
-    if respond_to?(context.kind) && for_registered_user?
+    if respond_to?(context.kind) && !private_user? && for_registered_user?
       event = send context.kind
       PushEventToIftttRealtime.perform_async(event: event)
     end
@@ -33,6 +33,10 @@ class CreateEventFromStream < Sidekiq::Interactor
 
   def for_registered_user?
     RegisteredUser.where(user_id: impacted_users).exists?
+  end
+
+  def private_user?
+    context.record['author']['is_private']
   end
 
   def impacted_users
