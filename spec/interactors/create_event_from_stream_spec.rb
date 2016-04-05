@@ -99,6 +99,34 @@ describe CreateEventFromStream do
         expect(Event.count).to eq 0
       end
     end
+
+    context 'private user' do
+      let(:record) do
+        {
+          'post' => {
+            'id' => '60',
+            'created_at' => 2.minutes.ago,
+            'body' => '[{"kind":"text","data":"and another"}]',
+            'nsfw' => true,
+            'url' => 'https://ello.co/archer/posts/60'
+          },
+          'author' => {
+            'id' => '42',
+            'username' => 'archer',
+            'url' => 'https://ello.co/archer',
+            'is_private' => true
+          }
+        }
+      end
+
+      let(:kind) { 'post_was_created' }
+
+      it 'should not do anything' do
+        described_class.perform(kind: kind, record: record)
+
+        expect(Event.count).to eq 0
+      end
+    end
   end
 
   context 'user is not registered' do
