@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '>= 5.0.0.beta2', '< 5.1'
+gem 'rails', '~> 5.0.0'
 gem 'pg', '~> 0.18'
 gem 'puma'
 
@@ -29,4 +29,3 @@ group 'production' do
   gem 'honeybadger'
   gem 'rails_12factor'
 end
-
