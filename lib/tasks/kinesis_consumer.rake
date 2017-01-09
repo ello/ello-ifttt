@@ -6,8 +6,8 @@ namespace :kinesis do
       stream_name: ENV['KINESIS_STREAM_NAME'],
       prefix:      ENV['KINESIS_STREAM_PREFIX'] || ''
     )
-
-    stream.run! do |record, kind|
+    batch_size = Integer(ENV['CONSUMER_BATCH_SIZE'] || StreamReader::DEFAULT_BATCH_SIZE)
+    stream.run!(batch_size: batch_size) do |record, kind|
       CreateEventFromStream.perform_async(record: record, kind: kind.underscore)
     end
   end
