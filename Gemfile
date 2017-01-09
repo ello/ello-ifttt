@@ -6,7 +6,7 @@ gem 'puma'
 
 gem 'jwt'
 
-gem 'kinesis-stream-reader', github: 'ello/kinesis-stream-reader', require: 'stream_reader'
+gem 'kinesis-stream-reader', github: 'ello/kinesis-stream-reader', require: 'stream_reader', ref: 'f70d853'
 gem 'interactor-rails', '~> 2.0'
 
 gem 'sidekiq'
