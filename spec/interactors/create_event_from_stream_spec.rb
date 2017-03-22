@@ -3,7 +3,7 @@ require 'rails_helper'
 describe CreateEventFromStream do
 
   before do
-    allow(PushEventToIftttRealtime).to receive(:perform_async)
+    allow(PushEventToIftttRealtime).to receive(:perform_in)
   end
 
   context 'for a registered user' do
@@ -48,7 +48,7 @@ describe CreateEventFromStream do
       end
 
       it 'should push event to realtime interactor' do
-        expect(PushEventToIftttRealtime).to have_received(:perform_async).with(event: an_instance_of(Event))
+        expect(PushEventToIftttRealtime).to have_received(:perform_in).with(anything(), event: an_instance_of(Event))
       end
     end
 
@@ -85,7 +85,7 @@ describe CreateEventFromStream do
       end
 
       it 'should push event to realtime interactor' do
-        expect(PushEventToIftttRealtime).to have_received(:perform_async).with(event: an_instance_of(Event))
+        expect(PushEventToIftttRealtime).to have_received(:perform_in).with(anything(), event: an_instance_of(Event))
       end
     end
 
