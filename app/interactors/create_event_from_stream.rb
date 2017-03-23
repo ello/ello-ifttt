@@ -2,7 +2,7 @@ require_relative '../../lib/sidekiq/interactor'
 
 class CreateEventFromStream < Sidekiq::Interactor
 
-  IMAGE_PROCESSING_DELAY = (ENV['IMAGE_PROCESSING_DELAY'] || '120').to_i
+  IMAGE_PROCESSING_DELAY = (ENV['IMAGE_PROCESSING_DELAY'] || '120').to_i.seconds
 
   def call(_c)
     if respond_to?(context.kind) && !private_user? && for_registered_user?
