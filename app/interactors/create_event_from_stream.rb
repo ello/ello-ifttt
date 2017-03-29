@@ -2,10 +2,12 @@ require_relative '../../lib/sidekiq/interactor'
 
 class CreateEventFromStream < Sidekiq::Interactor
 
+  IMAGE_PROCESSING_DELAY = (ENV['IMAGE_PROCESSING_DELAY'] || '120').to_i.seconds
+
   def call(_c)
     if respond_to?(context.kind) && !private_user? && for_registered_user?
       event = send context.kind
-      PushEventToIftttRealtime.perform_async(event: event)
+      PushEventToIftttRealtime.perform_in(IMAGE_PROCESSING_DELAY, event: event)
     end
   end
 
