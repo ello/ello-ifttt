@@ -40,7 +40,7 @@ Style/Blocks:
   Enabled: false
 Style/CollectionMethods:
   PreferredMethods:
-    find: 'detect'
+    find: "detect"
 Style/BracesAroundHashParameters:
   EnforcedStyle: context_dependent
   SupportedStyles:
