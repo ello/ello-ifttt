@@ -1,5 +1,5 @@
 GIT
-  remote: git://github.com/ello/kinesis-stream-reader.git
+  remote: https://github.com/ello/kinesis-stream-reader.git
   revision: b6b5c903818b23a687ff4b735d96c34d33a080ab
   specs:
     kinesis-stream-reader (0.3.0)
@@ -10,7 +10,7 @@ GIT
       redis (~> 3.2.2)
 
 GIT
-  remote: git://github.com/sinatra/sinatra.git
+  remote: https://github.com/sinatra/sinatra.git
   revision: ac5404dbd897a4b3c5b3921d2f89fecd3b540ed3
   specs:
     rack-protection (2.1.0)
@@ -74,8 +74,15 @@ GEM
     crass (1.0.6)
     diff-lcs (1.4.4)
     erubis (2.7.0)
-    faraday (1.0.1)
+    faraday (1.4.1)
+      faraday-excon (~> 1.1)
+      faraday-net_http (~> 1.0)
+      faraday-net_http_persistent (~> 1.1)
       multipart-post (>= 1.2, < 3)
+      ruby2_keywords (>= 0.0.4)
+    faraday-excon (1.1.0)
+    faraday-net_http (1.0.1)
+    faraday-net_http_persistent (1.1.0)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
     honeybadger (4.8.0)
@@ -207,7 +214,7 @@ DEPENDENCIES
   spring
 
 RUBY VERSION
-   ruby 2.3.7p456
+   ruby 2.7.3p183
 
 BUNDLED WITH
-   1.14.4
+   2.2.16
