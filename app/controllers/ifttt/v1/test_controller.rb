@@ -45,7 +45,7 @@ class Ifttt::V1::TestController < ApplicationController
   def create_test_user!
     RegisteredUser.where(
       user_id: 'test-user-1',
-      created_at: Time.new(2015, 1, 1) # Before posts created
+      created_at: Time.utc(2015, 1, 1) # Before posts created
     ).first_or_create
   end
 
@@ -57,7 +57,7 @@ class Ifttt::V1::TestController < ApplicationController
         owner_id: 'test-user-1',
         action_taken_by_id: 'test-user-1',
         kind: 'post_was_created',
-        created_at: Time.new(2016, 01, i + 1)
+        created_at: Time.utc(2016, 01, i + 1)
       ).first_or_create(
         payload: {
           post: {
@@ -72,10 +72,10 @@ class Ifttt::V1::TestController < ApplicationController
         owner_id: "test-user-#{i + 10}",
         action_taken_by_id: 'test-user-1',
         kind: 'post_was_loved',
-        created_at: Time.new(2016, 01, i + 1)
+        created_at: Time.utc(2016, 01, i + 1)
       ).first_or_create!(
         payload: {
-          loved_at: Time.new(2016, 01, i + 1),
+          loved_at: Time.utc(2016, 01, i + 1),
           post: {
             id: "test-post-#{i}",
             url: "https://ello.co/test-user-1/posts/test-post-#{i}"
